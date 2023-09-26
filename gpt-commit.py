@@ -20,7 +20,7 @@ def get_commit_message_from_chatgpt(diff_output):
 
     response = openai.Completion.create(
       engine="davinci",
-      prompt=f"Based on the following git changes:\n\n{diff_output}\n\nProvide a suitable commit message:",
+      prompt=f"Based on the following git diff:\n\n{diff_output}\n\nProvide a commit message describing the changes:",
       max_tokens=100
     )
     message = response.choices[0].text.strip()
