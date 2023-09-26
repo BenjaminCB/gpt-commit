@@ -20,7 +20,7 @@ def get_commit_message_from_chatgpt(diff_output):
 
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Based on the following git changes:\n\n" + diff_output + "\n\nProvide a suitable commit message:"}]
+        messages=[{"role": "user", "content": "Based on the following git changes:\n\n" + diff_output + "\n\nProvide a suitable commit message, and only include the commit message in your response:"}]
     )
 
     message = completion.choices[0].message.content
