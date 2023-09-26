@@ -18,17 +18,17 @@ def get_commit_message_from_chatgpt(diff_output):
 
     openai.api_key = openai_api_key
 
-    response = openai.Completion.create(
-      engine="davinci",
-      prompt=f"Based on the following git diff:\n\n{diff_output}\n\nProvide a commit message describing the changes:",
-      max_tokens=100
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": "Based on the following git changes:\n\n" + diff_output + "\n\nProvide a suitable commit message:"}]
     )
-    message = response.choices[0].text.strip()
+
+    message = completion.choices[0].message.content
+
     return message
 
 def main():
     diff_output = get_git_diff()
-    print(diff_output)
     if not diff_output:
         print("No changes detected. Exiting.")
         return
