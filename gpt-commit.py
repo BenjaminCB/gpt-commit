@@ -28,6 +28,7 @@ def get_commit_message_from_chatgpt(diff_output):
 
 def main():
     diff_output = get_git_diff()
+    print(diff_output)
     if not diff_output:
         print("No changes detected. Exiting.")
         return
